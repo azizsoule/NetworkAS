@@ -1,4 +1,4 @@
 package ci.miage.mob.networkAS.models
 
-class Graph(nodes : List<Node>, links : List<Link>) {
+class Graph(val nodes: List<Node> = mutableListOf<Node>(), val links : List<Link> = mutableListOf<Link>()) {
 }
