@@ -3,6 +3,8 @@ package ci.miage.mob.networkAS.views
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import ci.miage.mob.networkAS.models.Graph
 import ci.miage.mob.networkAS.models.Link
@@ -10,25 +12,24 @@ import ci.miage.mob.networkAS.models.Node
 
 class GraphView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr) {
+) : View(context, attrs, defStyleAttr)  {
 
-    val node1 = Node(x = 200f, y = 500f, color = Color.BLUE, label = "node1")
-    val node2 = Node(x = 50f, y = 200f, color = Color.RED, label = "node2")
+    private val node1 = Node(x = 200f, y = 500f, color = Color.BLUE, label = "node1")
+    private val node2 = Node(x = 50f, y = 200f, color = Color.RED, label = "node2")
 
-    var graph: Graph = Graph(
-        nodes = mutableListOf(node1, node2),
-        links = mutableListOf(Link(start = node1, end = node2, color = Color.GREEN, label = "Link"))
+    private var graph: Graph = Graph(
+        nodes = mutableSetOf(node1, node2),
+        links = mutableSetOf(Link(start = node1, end = node2, color = Color.GREEN, label = "Link"))
     )
 
     private fun drawNode(node: Node, canvas: Canvas) {
-        val radius : Float = 20f
         val paint: Paint = Paint()
 
         paint.color = node.color
-        canvas.drawCircle(node.x, node.y, radius, paint)
+        canvas.drawCircle(node.x, node.y, Node.RADIUS, paint)
 
         paint.textSize = 24f
-        canvas.drawText(node.label, node.x - (radius + 5), node.y - (radius + 5), paint)
+        canvas.drawText(node.label, node.x - (Node.RADIUS + 5), node.y - (Node.RADIUS + 5), paint)
     }
 
     private fun drawLink(link: Link, canvas: Canvas) {
@@ -56,5 +57,30 @@ class GraphView @JvmOverloads constructor(
             drawLink(link, canvas as Canvas)
         }
     }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        return gestureDetector.onTouchEvent(event)
+    }
+
+    private val listener =  object : GestureDetector.SimpleOnGestureListener() {
+        override fun onDown(e: MotionEvent): Boolean {
+            node1.x = e.x
+            node1.y = e.y
+            invalidate()
+            return true
+        }
+
+        override fun onFling(
+            e1: MotionEvent?,
+            e2: MotionEvent?,
+            velocityX: Float,
+            velocityY: Float
+        ): Boolean {
+            return true
+        }
+
+    }
+
+    private val gestureDetector: GestureDetector = GestureDetector(context, listener)
 
 }
