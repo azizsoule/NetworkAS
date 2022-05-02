@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/add_node_mode"
+        android:title="Mode ajout d'objets"
+        />
+
+    <item
+        android:id="@+id/add_link_mode"
+        android:title="Mode ajout de connexions"
+        />
+
+    <item
+        android:id="@+id/edition_mode"
+        android:title="Mode édition"
+        />
+
+</menu>

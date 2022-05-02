@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controllers.MainActivity">
+    tools:context=".activities.MainActivity">
 
-<ci.miage.mob.networkAS.views.GraphView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    <ci.miage.mob.networkAS.views.GraphView
+        android:id="@+id/graph_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
