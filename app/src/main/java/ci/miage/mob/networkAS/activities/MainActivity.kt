@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         graphView = findViewById<GraphView>(R.id.graph_view)
-        supportActionBar?.title = "Network Ano N\\'Ganza Jean-noel / Soulé Arémou Malick Aziz"
+        supportActionBar?.title = "Network Ano N'Ganza Jean-noel / Soulé Arémou Malick Aziz"
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
